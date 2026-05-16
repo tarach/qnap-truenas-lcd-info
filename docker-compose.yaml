@@ -1,0 +1,23 @@
+services:
+  qnap-lcd:
+    image: tarach/qnap-lcd-truenas:latest
+    container_name: qnap-lcd
+    restart: unless-stopped
+
+    devices:
+      - /dev/ttyS1:/dev/ttyS1
+
+    pid: host
+    network_mode: host
+
+    volumes:
+      - /mnt:/mnt:ro
+
+    environment:
+      LCD_WIDTH: "16"
+      LCD_IFACE: "ens11"
+      LCD_MOUNTS: "Media=/mnt/tank/media,Fast=/mnt/fast"
+      LCD_REFRESH_SECONDS: "0.5"
+      LCD_ON_SECONDS: "30"
+      LCD_ALWAYS_ON: "false"
+
